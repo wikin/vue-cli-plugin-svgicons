@@ -1,4 +1,5 @@
 const SVGO = require('svgo')
+const config = require ('./config')
 
 async function SvgIconLoader(source) {
   const svgo = new SVGO({
@@ -12,20 +13,37 @@ async function SvgIconLoader(source) {
   const { data } = await svgo.optimize(source)
 
   const match = data.match(/^<svg([^>]*)>(.*)<\/svg>$/)
-  const match2 = [
-    ...match[1].matchAll(
-      /(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g
-    ),
-  ]
-  const attributes = {}
-  match2.forEach((arg) => {
-    attributes[arg[1]] = arg[2]
-  })
+  
+  const props = {
+    size: {
+      type: Number,
+      default: config.size,
+    },
+    stroke: {
+      type: Number,
+      default: config.stroke,
+    },
+    color: {
+      type: String,
+      default: config.color,
+    },
+  }
 
-  return `module.exports=${JSON.stringify({
-    attributes,
-    content: match[2],
-  })}`
+  return `
+<template>
+  <svg${match[1]}
+    :width="size"
+    :height="size"
+    :stroke="color"
+    :stroke-width="stroke"
+  >${match[2]}</svg>
+</template>
+
+<script>
+  export default {
+    props: ${JSON.stringify(props)},
+  }
+</script>`
 }
 
 module.exports = SvgIconLoader
