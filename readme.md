@@ -1,4 +1,17 @@
+# Vue CLI Plugin Svgicons
+
+[![npm](https://img.shields.io/npm/v/vue-cli-plugin-svgicons.svg)
+![npm](https://img.shields.io/npm/dm/vue-cli-plugin-svgicons.svg)](https://www.npmjs.com/package/vue-cli-plugin-svgicons)
+
 Vue CLI plugin to handle loading SVG files in specific folder as components. This plugin can also create from all of them global components.
+
+## Getting started
+
+Install the plugin into your project:
+
+```bash
+vue add svgicons
+```
 
 ## Usage
 
