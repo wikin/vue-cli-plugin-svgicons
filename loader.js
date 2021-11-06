@@ -1,7 +1,9 @@
 const SVGO = require('svgo')
-const config = require ('./config')
+const { getOptions } = require('loader-utils')
 
 async function SvgIconLoader(source) {
+  const config = getOptions(this)
+
   const svgo = new SVGO({
     plugins: [
       { removeTitle: true },

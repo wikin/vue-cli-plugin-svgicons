@@ -1,17 +1,14 @@
-const { h } = require('vue')
-const config = require ('./config')
+const pluginDefaults = require ('./pluginDefaults')
 
 
-module.exports = function install(app) {
+module.exports = function install(app, pluginOptions) {
   // Register icons as components
-
+  const options = {...pluginDefaults, ...pluginOptions} 
   const icons = require.context('@svgicons', false, /\.svg$/)
   
   icons.keys().forEach((fileName) => {
-    console.log(fileName)
     const name = fileName.replace(/^.+\//, '').replace(/\.\w+$/, '')
     const source = icons(fileName)
-    console.log(source)
-    app.component(config.prefix + name, source.default)
+    app.component(options.prefix + name, source.default)
   })
 }

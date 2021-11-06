@@ -1,11 +1,12 @@
 {
-  "name": "vue-cli-plugin-svgicons",
-  "version": "0.0.2",
-  "description": "Vue 3 Plugin creating global components from all SVG files in specific folder.",
-  "main": "index.js",
   "author": "Miroslav Peterka",
-  "license": "ISC",
   "dependencies": {
+    "loader-utils": "^1.4.0",
     "svgo": "^1.3.2"
-  }
+  },
+  "description": "Vue CLI plugin to handle loading SVG files in specific folder as components and to optionally create from them global components.",
+  "license": "ISC",
+  "main": "index.js",
+  "name": "vue-cli-plugin-svgicons",
+  "version": "0.0.3"
 }

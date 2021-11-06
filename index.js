@@ -1,10 +1,9 @@
 const path = require('path')
-const config = require('./config')
+const loaderDefaults = require('./loaderDefaults')
 
-
-module.exports = (api, options) => {
-  const iconsfolder = path.resolve(config.path)
-
+module.exports = (api, webpackOptions) => {
+  const options = {...loaderDefaults, ...(webpackOptions.pluginOptions||{}).svgicons}
+  const iconsfolder = path.resolve(options.path)
 
   api.chainWebpack(webpackChain => {
       
@@ -27,6 +26,7 @@ module.exports = (api, options) => {
           .end()
         .use('svgicons')
           .loader(path.resolve(__dirname, './loader'))
+          .options(options)
           .end()
     })
 
