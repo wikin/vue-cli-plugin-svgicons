@@ -8,5 +8,5 @@
   "license": "ISC",
   "main": "index.js",
   "name": "vue-cli-plugin-svgicons",
-  "version": "0.0.4"
+  "version": "0.0.5"
 }

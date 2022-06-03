@@ -28,7 +28,7 @@ module.exports = (api, webpackOptions) => {
           .loader(path.resolve(__dirname, './loader'))
           .options(options)
           .end()
-    })
+  })
 
 
   api.configureWebpack({
@@ -36,7 +36,8 @@ module.exports = (api, webpackOptions) => {
       extensions: ['.svg'],
       alias: {
         '@svgicons': iconsfolder
-      }
+      },
+      fallback: { path: false }
     }
   })
 
