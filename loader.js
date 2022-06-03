@@ -1,18 +1,17 @@
-const SVGO = require('svgo')
+const { optimize } = require('svgo')
 const { getOptions } = require('loader-utils')
 
 async function SvgIconLoader(source) {
   const config = getOptions(this)
-
-  const svgo = new SVGO({
+  const { data } = await optimize(source,{
     plugins: [
-      { removeTitle: true },
-      { removeViewBox: false },
-      { removeDimensions: true },
-      { removeAttrs: { attrs: '(stroke|stroke-width)' } },
+      'preset-default',
+      { name: 'removeViewBox', params: { active: false } },
+      { name: 'removeDimensions', params: { active: true } },
+      { name: 'removeXMLNS', params: { active: true } },
+      { name: 'removeAttrs', params: { attrs: '(stroke|stroke-width)' } },
     ],
   })
-  const { data } = await svgo.optimize(source)
 
   const match = data.match(/^<svg([^>]*)>(.*)<\/svg>$/)
   
